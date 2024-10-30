@@ -27,4 +27,4 @@ export const registerUser=expressAsyncHandler(async(req,res)=>{
 })
 
 
-//7 min
+// 7 min
