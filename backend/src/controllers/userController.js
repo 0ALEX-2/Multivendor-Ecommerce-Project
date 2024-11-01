@@ -1,15 +1,16 @@
-import {User} from "../models/userModel"
+import {User} from "../models/userModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import expressAsyncHandler from "express-async-handler"
+import { genetareToken } from "../utils/utils.js"
+import { AppError } from "../middlewares/errorHandler.js"
 
+//---------------------User Registration------------------
 export const registerUser=expressAsyncHandler(async(req,res)=>{
     const {name,email,password}=req.body
-         
-    try {
         const userExists=await User.findOne({email})
         if(userExists){
-            return res.status(400).json({message:"User already exists"})
+            throw new AppError("User Already Exists!",400)
         } 
         const user=await User.create({
             name,email,password
@@ -19,10 +20,24 @@ export const registerUser=expressAsyncHandler(async(req,res)=>{
                 user
             })
         }else{
-            res.status(400).json({message:"Invalid User Data."})
+            throw new AppError("Invalid User data!",400)
         }    
-    } catch (error) {
-        
+})
+
+//----------------User Login---------------------
+export const loginUser=expressAsyncHandler(async(req,res)=>{
+    const {email,password}=req.body
+    const user=await User.findOne({email})
+    if(user && (await user.comparePassword(password,user.password))){
+        res.json({
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            role:user.role,
+            token:genetareToken(user._id)
+        })
+    }else{
+        throw new AppError("Invalid Email or Password!",400)
     }
 })
 
