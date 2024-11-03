@@ -8,8 +8,8 @@ userRouter.post("/register",registerUser)
 userRouter.post("/login",loginUser)
 userRouter.get("/profile",protect,profile)
 userRouter.put("/profile",protect,updateProfile)
-userRouter.get("/users",protect,authorize("admin"),getAllProfile)
-userRouter.delete("/user/:id",protect,deleteUserProfile)
+userRouter.get("/profiles",protect,authorize("admin"),getAllProfile)
+userRouter.delete("/:id",protect,deleteUserProfile)
 
 
 export default userRouter

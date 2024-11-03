@@ -12,18 +12,19 @@ export const protect = async(req,res,next)=>{
             req.user=await User.findById(decoded.id).select("-password")
             next()
         } catch (error) {
-            throw new AppError("Not authorized",401)
+            res.status(401).json({status:false,message:"Not authorized"})
         }
     }
     if(!token){
-        throw new AppError("Send token to the header.",401)
+       res.status(401).json({status:false,message:"No token attached to the header."})
     }
 }
 
 export const authorize=(...roles)=>{
     return (req,res,next)=>{
         if(!roles.includes(req.user.role)){
-            throw new AppError("You don't have permissions",403)
+            // throw new AppError("You don't have permissions",403)
+            res.status(403).json({status:false,message:"You don't have permissions"})
         }
         next()
     }

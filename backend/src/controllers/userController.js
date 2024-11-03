@@ -60,8 +60,8 @@ export const profile=expressAsyncHandler(async(req,res)=>{
 })
 
 export const updateProfile=expressAsyncHandler(async(req,res)=>{
-    const {_id}=req.body
-
+    const {_id}=req.user
+   
     const user=await User.findById(_id)
     if(user){
        user.name=req.body.name || user.name;
@@ -70,7 +70,7 @@ export const updateProfile=expressAsyncHandler(async(req,res)=>{
        user.phone=req.body.phone || user.phone;
        if(req.body.password){user.password=req.body.password}
 
-       const updateUser=await User.save()
+       const updateUser=await user.save()
 
         res.json({
             _id:user._id,

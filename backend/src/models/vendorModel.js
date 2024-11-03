@@ -32,6 +32,10 @@ const vendorSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
+    storeBanner:{
+        type:String,
+        required:true
+    },
     storeDescription:{
         type:String,
         required:true

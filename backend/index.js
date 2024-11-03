@@ -6,6 +6,7 @@ import morgan from "morgan";
 import cors from "cors"
 import { errorHandler, notFoundErrorHandler } from "./src/middlewares/errorHandler.js";
 import userRouter from "./src/routes/userRoutes.js";
+import vendorRouter from "./src/routes/vendorRoutes.js";
 
 
 dotenv.config(); // Load environment variables
@@ -20,7 +21,7 @@ app.use(cors())
 
 //Api route
 app.use("/api/user",userRouter)
-
+app.use("/api",vendorRouter)
 
 //Error handler middleware
 app.use(errorHandler)
