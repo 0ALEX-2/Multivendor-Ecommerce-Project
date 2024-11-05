@@ -7,6 +7,7 @@ import cors from "cors"
 import { errorHandler, notFoundErrorHandler } from "./src/middlewares/errorHandler.js";
 import userRouter from "./src/routes/userRoutes.js";
 import vendorRouter from "./src/routes/vendorRoutes.js";
+import productRouter from "./src/routes/productRoutes.js";
 
 
 dotenv.config(); // Load environment variables
@@ -22,6 +23,7 @@ app.use(cors())
 //Api route
 app.use("/api/user",userRouter)
 app.use("/api",vendorRouter)
+app.use("/api/product",productRouter)
 
 //Error handler middleware
 app.use(errorHandler)
