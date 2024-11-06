@@ -8,6 +8,10 @@ import { errorHandler, notFoundErrorHandler } from "./src/middlewares/errorHandl
 import userRouter from "./src/routes/userRoutes.js";
 import vendorRouter from "./src/routes/vendorRoutes.js";
 import productRouter from "./src/routes/productRoutes.js";
+import brandRouter from "./src/routes/brandRoutes.js";
+import categoryRouter from "./src/routes/categoryRoutes.js";
+import subCategoryRouter from "./src/routes/subCategoryRoutes.js";
+import wishlistRouter from "./src/routes/wishlistRoutes.js";
 
 
 dotenv.config(); // Load environment variables
@@ -24,6 +28,10 @@ app.use(cors())
 app.use("/api/user",userRouter)
 app.use("/api",vendorRouter)
 app.use("/api/product",productRouter)
+app.use("/api/brand",brandRouter)
+app.use("/api/category",categoryRouter)
+app.use("/api/subcategory",subCategoryRouter)
+app.use("/api/wishlist",wishlistRouter)
 
 //Error handler middleware
 app.use(errorHandler)
