@@ -55,3 +55,15 @@ export const deleteReview=expressAsyncHandler(async(req,res)=>{
        throw new AppError(error,400) 
     }
 })
+
+export const approveReview=expressAsyncHandler(async(req,res)=>{
+    try {
+        const review=await Review.findByIdAndUpdate(req.params.id,{isApproved:req.body.isApproved},{new:true})
+        if(!review){
+            throw new AppError("Review not found",404)
+        }
+        res.status(201).json({status:true,message:"Review updated successfully!"})
+    } catch (error) {
+        throw new AppError(error,400)
+    }
+})
