@@ -13,6 +13,7 @@ import categoryRouter from "./src/routes/categoryRoutes.js";
 import subCategoryRouter from "./src/routes/subCategoryRoutes.js";
 import wishlistRouter from "./src/routes/wishlistRoutes.js";
 import reviewRouter from "./src/routes/reviewRoutes.js";
+import uploadRouter from "./src/routes/uploadRoutes.js";
 
 
 dotenv.config(); // Load environment variables
@@ -34,6 +35,7 @@ app.use("/api/category",categoryRouter)
 app.use("/api/subcategory",subCategoryRouter)
 app.use("/api/wishlist",wishlistRouter)
 app.use("/api/review",reviewRouter)
+app.use("/api/upload",uploadRouter)
 
 //Error handler middleware
 app.use(errorHandler)
