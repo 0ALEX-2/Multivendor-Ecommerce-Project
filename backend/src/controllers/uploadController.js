@@ -74,3 +74,24 @@ export const uploadFile = expressAsyncHandler(async (req, res) => {
   // Pipe the file stream to the BunnyCDN request
   readStream.pipe(reqBunny);
 });
+
+export const deleteFile=expressAsyncHandler(async(req,res)=>{
+    const url=`https://${HOSTNAME}/${STORAGE_ZONE_NAME}/${req.params.fileName}`
+    const options={
+        method:'DELETE',
+        headers:{AccessKey:ACCESS_KEY}
+    }
+    try {
+        const response=await fetch(url,options)
+        if(response.ok){
+            res.status(200).json({status:true,msg:"File deleted successfully"})
+        }else{
+            const errorText=await response.text()
+            res.status(response.status).json({status:false,msg:"File deletion failed",error:errorText})
+        }
+    } catch (error) {
+        res.status(500).json({
+            status:false,msg:"Error in deleting file"
+        })
+    }
+})
