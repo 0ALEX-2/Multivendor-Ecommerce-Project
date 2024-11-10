@@ -24,7 +24,7 @@ export const getAllReview=expressAsyncHandler(async(req,res)=>{
 
 export const getReviewById=expressAsyncHandler(async(req,res)=>{
     try {
-        const review=await Review.findOne({id:req.params.id})
+        const review=await Review.findOne({_id:req.params.id})
         res.status(200).json({status:true,data:review})
     } catch (error) {
         throw new AppError(error,400)
@@ -33,7 +33,7 @@ export const getReviewById=expressAsyncHandler(async(req,res)=>{
 
 export const updateReview=expressAsyncHandler(async(req,res)=>{
     try {
-        const review=await Review.findByIdAndUpdate(req.params.id,req.body,{new:true})
+        const review=await Review.findByIdAndUpdate(req.params.id,req.body,{new:true}).populate([{path:"user"},{path:"product"}])
         if(!review){
             throw new AppError("Review not found",404)
         }

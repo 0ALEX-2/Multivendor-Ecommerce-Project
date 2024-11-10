@@ -1,11 +1,11 @@
 import express from "express"
-import { approveReview, createReview, deleteReview, getAllReview, getReviewById, updateReview } from "../controllers/reviewController"
+import { approveReview, createReview, deleteReview, getAllReview, getReviewById, updateReview } from "../controllers/reviewController.js"
 
 
 
 const reviewRouter=express.Router()
 
-reviewRouter.post("/",createReview)
+reviewRouter.post("/create",createReview)
 reviewRouter.get("/all",getAllReview)
 reviewRouter.get("/:id",getReviewById)
 reviewRouter.put("/:id",updateReview)
